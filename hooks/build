@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+if [ "$DOCKER_TAG" = "latest" ]; then
+    echo "Building :latest, without VERSION_ARG"
+    docker build --build-arg PYTHON_VERSION="3.8" --build-arg POETRY_VERSION="1.0.2" -t ${IMAGE_NAME} .
+elif [ "$DOCKER_TAG" = "python3.8-poetry1.0.2" ]; then
+    echo "Building :$DOCKER_TAG, from git"
+    docker build --build-arg PYTHON_VERSION="3.8" --build-arg POETRY_VERSION="1.0.2"  -t ${IMAGE_NAME} .
+elif [ "$DOCKER_TAG" = "python3.7-poetry1.0.2" ]; then
+    echo "Building :$DOCKER_TAG, from git"
+    docker build --build-arg PYTHON_VERSION="3.7" --build-arg POETRY_VERSION="1.0.2"  -t ${IMAGE_NAME} .
+elif [ "$DOCKER_TAG" = "python3.6-poetry1.0.2" ]; then
+    echo "Building :$DOCKER_TAG, from git"
+    docker build --build-arg PYTHON_VERSION="3.6" --build-arg POETRY_VERSION="1.0.2"  -t ${IMAGE_NAME} .
+fi
