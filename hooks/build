@@ -13,7 +13,7 @@ fi
 
 printf "Building with DOCKER_TAG = $DOCKER_TAG\n"
 
-if [ "$DOCKER_TAG" = "latest" || "$DOCKER_TAG" = "python3.8-poetry${POETRY_VERSION}" ]; then
+if [ "$DOCKER_TAG" = "latest" ] || [ "$DOCKER_TAG" = "python3.8-poetry${POETRY_VERSION}" ]; then
     docker build --build-arg PYTHON_VERSION="3.8" --build-arg POETRY_VERSION=${POETRY_VERSION} -t ${IMAGE_NAME} .
 elif [ "$DOCKER_TAG" = "python3.7-poetry${POETRY_VERSION}" ]; then
     docker build --build-arg PYTHON_VERSION="3.7" --build-arg POETRY_VERSION=${POETRY_VERSION}  -t ${IMAGE_NAME} .
