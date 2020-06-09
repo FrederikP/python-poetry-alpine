@@ -1,25 +1,24 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 regex="^poetry([0-9]+\.[0-9]+\.[0-9]+)$"
 
 if [[ $SOURCE_BRANCH =~ $regex ]]
 then
     POETRY_VERSION="${BASH_REMATCH[1]}"
-    printf "Poetry version extracted from tag: $POETRY_VERSION"
+    printf "Poetry version extracted from tag: $POETRY_VERSION\n"
 else
-    printf "Could not extract poetry version from $SOURCE_BRANCH"
+    printf "Could not extract poetry version from $SOURCE_BRANCH\n"
+    exit 1
 fi
 
+printf "Building with DOCKER_TAG = $DOCKER_TAG\n"
+
 if [ "$DOCKER_TAG" = "latest" ]; then
-    echo "Building :latest, without VERSION_ARG"
     docker build --build-arg PYTHON_VERSION="3.8" --build-arg POETRY_VERSION=${POETRY_VERSION} -t ${IMAGE_NAME} .
 elif [ "$DOCKER_TAG" = "python3.8-poetry${POETRY_VERSION}" ]; then
-    echo "Building :$DOCKER_TAG, from git"
     docker build --build-arg PYTHON_VERSION="3.8" --build-arg POETRY_VERSION=${POETRY_VERSION}  -t ${IMAGE_NAME} .
 elif [ "$DOCKER_TAG" = "python3.7-poetry${POETRY_VERSION}" ]; then
-    echo "Building :$DOCKER_TAG, from git"
     docker build --build-arg PYTHON_VERSION="3.7" --build-arg POETRY_VERSION=${POETRY_VERSION}  -t ${IMAGE_NAME} .
 elif [ "$DOCKER_TAG" = "python3.6-poetry${POETRY_VERSION}" ]; then
-    echo "Building :$DOCKER_TAG, from git"
     docker build --build-arg PYTHON_VERSION="3.6" --build-arg POETRY_VERSION=${POETRY_VERSION}  -t ${IMAGE_NAME} .
 fi
