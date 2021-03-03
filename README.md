@@ -2,3 +2,15 @@
 
 # python-poetry-alpine
 Alpine based Dockerfile for python poetry dependency management
+
+## Updating docker images for latest poetry version
+
+Test whether the build works using latest poetry version and adjust Dockerfile accordingly.
+
+`git tag poetry1.1.4`
+
+`git push -f --tags`
+
+## Adding support for latest python version
+
+Change `hooks/build` accordingly and adjust build settings on docker hub.
