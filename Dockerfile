@@ -10,8 +10,8 @@ RUN apk add --no-cache \
         libressl-dev \
         musl-dev \
         libffi-dev && \
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
-    source $HOME/.cargo/env \
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
+    source $HOME/.cargo/env && \
     pip install --no-cache-dir poetry==${POETRY_VERSION} && \
     apk del \
         curl \
