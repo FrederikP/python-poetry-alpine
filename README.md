@@ -4,6 +4,8 @@
 # python-poetry-alpine
 Alpine based Dockerfile for python poetry dependency management
 
+Please note that now there is a poetry alpine package you can use: https://pkgs.alpinelinux.org/packages?name=poetry&branch=edge
+
 ## Updating docker images for latest poetry version
 
 Test whether the build works using latest poetry version and adjust Dockerfile accordingly.
